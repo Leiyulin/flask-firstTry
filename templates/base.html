@@ -5,6 +5,12 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 {% endblock head %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_momemt() }}
+{% endblock scripts %}
+
 {% block title %}Flasky{% endblock %}
 
 {% block navbar %}
@@ -33,5 +39,8 @@
     <div class="page_content">
 	    {% block page_content %}{% endblock page_content %}
     </div>
+    <p>The local date and time is {{ moment(current_time).format('LLL') }}</p>
+    <p>That was {{ moment(current_time).formNow(refresh=True) }}</p>
 </div>
+
 {% endblock %}

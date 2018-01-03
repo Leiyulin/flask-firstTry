@@ -1,15 +1,17 @@
 from flask import Flask, render_template
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.script import Manager
-
+from flask.ext.moment import Moment
+from datetime import datetime
 
 app=Flask(__name__)
 manager=Manager(app)
 bootstrap=Bootstrap(app)
+moment=Moment(app)
 
 @app.route('/')
 def index():
-	return render_template('base.html')
+	return render_template('base.html', current_time=datetime.utcnow())
 #	return '<h1>hahaha</h1>'
 
 @app.errorhandler(404)
