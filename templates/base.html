@@ -8,7 +8,7 @@
 
 {% block scripts %}
 {{ super() }}
-{{ moment.include_momemt() }}
+{{ moment.include_moment() }}
 {% endblock scripts %}
 
 {% block title %}Flasky{% endblock %}
@@ -37,10 +37,23 @@
 {% block content %}
 <div class="container">
     <div class="page_content">
-	    {% block page_content %}{% endblock page_content %}
+	    {% block page_content %}
+	    <div class="page-header">
+		    <h1>Hello,{% if name %}{{ name }}{% else %}stranger{% endif %}!</h1>
+	    </div>
+	    {% endblock page_content %}
     </div>
-    <p>The local date and time is {{ moment(current_time).format('LLL') }}</p>
-    <p>That was {{ moment(current_time).formNow(refresh=True) }}</p>
 </div>
+
+<p>The local date and time is {{ moment(current_time).format('LLL') }}</p>
+<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
+
+<form method="POST">
+	{{ form.hidden_tag() }}
+	{{ form.name.label }}{{ form.name() }}
+	{{ form.submit() }}
+</form>
+{% import "bootstrap/wtf.html" as wtf %}
+{{ wtf.quick_form(form) }}
 
 {% endblock %}
